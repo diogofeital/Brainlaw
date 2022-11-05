@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\3 - Domain\DesafioBrainlaw.Domain.Shared\DesafioBrainlaw.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\3 - Domain\DesafioBrainlaw.Domain\DesafioBrainlaw.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

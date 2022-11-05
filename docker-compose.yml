@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: brainlaw-front
+    ports:
+        - "80:80"
+    volumes:
+        - ./1 - Presentation/DesafioBrainlaw.Front:/usr/share/nginx/html:ro
+    networks:
+        - brainlaw-dev
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    container_name: brainlaw-db
+    hostname: brainlawdb
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Dockersql123#
+        - MSSQL_PID=Express
+    ports:
+        - "1433:1433"
+    networks:
+        - brainlaw-dev
+
+  desafiobrainlaw.api:
+    image: ${DOCKER_REGISTRY-}desafiobrainlawapi
+    container_name: brainlaw-api
+    environment:
+        - ConnectionString=db
+    build:
+      context: .
+      dockerfile: 1 - Presentation/DesafioBrainlaw.API/Dockerfile
+    depends_on:
+        - db
+    ports:
+        - "5000:80"
+    networks:
+        - brainlaw-dev
+
+networks:
+    brainlaw-dev:
+        driver: bridge
